@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Programming Learning Platform</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css" rel="stylesheet">
+<style>
+    body { margin: 0; font-family: Arial, sans-serif; background-color: #0f172a; color: white; }
+    header { text-align: center; padding: 40px 20px; background: linear-gradient(to right, #1e3a8a, #2563eb); }
+    h1 { margin-bottom: 10px; }
+    .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 20px; }
+    .card { background-color: #1e293b; padding: 20px; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+    .card:hover { transform: scale(1.05); background-color: #334155; }
+    .lesson-section { display: none; padding: 20px; }
+    pre { background: #0f172a; padding: 15px; border-radius: 8px; overflow-x: auto; color: #a5b4fc; }
+    button { padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer; margin-bottom: 15px; background-color: #ef4444; color: white; }
+    .lesson-title { margin-top: 20px; margin-bottom: 5px; font-size: 1.2em; color: #60a5fa; }
+    .description { margin-bottom: 15px; color: #94a3b8; }
+    .exercise { background-color: #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+    .editor { height: 200px; border-radius: 8px; margin-bottom: 15px; }
+</style>
+</head>
+<body><header>
+<h1>Interactive Programming Learning Platform</h1>
+<p>Learn coding step by step with explanations, interactive exercises, and live coding.</p>
+</header><div class="container" id="languageCards">
+    <div class="card" onclick="showSection('python')">Python</div>
+    <div class="card" onclick="showSection('javascript')">JavaScript</div>
+    <div class="card" onclick="showSection('html')">HTML</div>
+    <div class="card" onclick="showSection('cpp')">C++</div>
+    <div class="card" onclick="showSection('php')">PHP</div>
+</div><div class="lesson-section" id="python">
+<button onclick="goBack()">Back</button>
+<h2>Python</h2>
+<p class="description">Learn Python from basics to advanced. Explanation, examples, interactive exercises included.</p>
+<h3 class="lesson-title">Variables</h3>
+<p class="description">Variables store data values. Example:</p>
+<pre><code>x = 10
+name = "Eyad"
+print(x, name)</code></pre>
+<div class="description">Try it yourself below:</div>
+<textarea id="pythonEditor" class="editor">x = 5
+print(x)</textarea>
+<button onclick="runPython()">Run Python</button>
+<pre id="pythonOutput"></pre>
+<div class="exercise">Exercise: Create a variable "age" and print if the person is adult (>=18).</div>
+</div><!-- Add similar sections for JavaScript, HTML, C++, PHP with editors and exercises --><script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script><script>
+function showSection(sectionId) {
+    document.getElementById('languageCards').style.display = 'none';
+    document.getElementById(sectionId).style.display = 'block';
+}
+function goBack() {
+    const sections = document.querySelectorAll('.lesson-section');
+    sections.forEach(section => section.style.display = 'none');
+    document.getElementById('languageCards').style.display = 'grid';
+}
+function runPython() {
+    const code = document.getElementById('pythonEditor').value;
+    try {
+        let result = eval(code); // For demo, note: using eval is unsafe for production
+        document.getElementById('pythonOutput').textContent = result;
+    } catch(e) {
+        document.getElementById('pythonOutput').textContent = e;
+    }
+}
+</script></body>
+</html>
